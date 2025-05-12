@@ -1,6 +1,6 @@
 # Translation API
 
-This project is a simple translation API built with **FastAPI**. It includes a RESTful interface for text translation and a basic frontend (located in the `./web` folder, not covered here).
+This project is a simple translation API built with **FastAPI**. It includes a RESTful interface for text translation.
 
 All backend code is located in the `./backend` directory.
 
