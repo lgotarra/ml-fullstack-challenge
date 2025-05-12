@@ -7,6 +7,8 @@ TEXT_FIELD = Field(..., max_length=500)
 VALID_TEXT_REGEX = re.compile(r"^[\w\d\s.,!?¿¡'\"-]+$")
 
 
+# Defines a model with a text field that is validated using a regular expression to
+# ensure it contains only valid characters.
 class TextValidatedModel(BaseModel):
     text: str = TEXT_FIELD
 

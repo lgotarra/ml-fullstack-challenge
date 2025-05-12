@@ -7,6 +7,12 @@ TRANSLATIONS_FILE = Path(__file__).parent.parent / "data" / "translations.json"
 
 
 def load_translations() -> Dict[str, Dict[str, str]]:
+    """
+    Reads translation data from file and organizes it into a dictionary of dictionaries.
+    :return: Returns a dictionary where the keys are strings
+    representing translation keys, and the values are dictionaries where the keys are language codes and
+    the values are the corresponding translations in that language.
+    """
     with open(TRANSLATIONS_FILE, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
 
