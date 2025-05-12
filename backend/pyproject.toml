@@ -1,0 +1,13 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "A lightweight FastAPI project that provides translation services"
+readme = "README.md"
+authors = [
+    {name = "Laura Gotarra", email = "97gotarra@gmail.com"},
+]
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi[standard]>=0.115.12",
+    "pydantic>=2.11.4",
+]

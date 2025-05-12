@@ -1,0 +1,27 @@
+[
+  {
+    "key": "Hello. How are you?",
+    "language": "Spanish",
+    "translation": "Hola. ¿Cómo estás?"
+  },
+  {
+    "key": "Hello. How are you?",
+    "language": "German",
+    "translation": "Hallo. Wie geht es dir?"
+  },
+  {
+    "key": "Hello. How are you?",
+    "language": "French",
+    "translation": "Bonjour. Comment ça va?"
+  },
+  {
+    "key": "Hello. How are you?",
+    "language": "Italian",
+    "translation": "Ciao. Come stai?"
+  },
+  {
+    "key": "Hello. How are you?",
+    "language": "Danish",
+    "translation": "Hej. Hvordan har du det?"
+  }
+]
