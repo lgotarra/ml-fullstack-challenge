@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import defaultdict
 from typing import Dict
 
-TRANSLATIONS_FILE = Path(__file__).parent / "data" / "translations.json"
+TRANSLATIONS_FILE = Path(__file__).parent.parent / "data" / "translations.json"
 
 
 def load_translations() -> Dict[str, Dict[str, str]]:
