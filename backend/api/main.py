@@ -1,12 +1,10 @@
-from api.models import TranslationRequest
 from fastapi import FastAPI, HTTPException
-from api.translation_service import get_translation
 import re
+from api.models import TranslationRequest, JeringonzaRequest
+from api.services.translation_service import get_translation
+from api.services.jeringonza_service import get_jeringonza
 
 app = FastAPI()
-
-# Allow only letters, numbers, punctuation and basic whitespace
-VALID_TEXT_REGEX = re.compile(r"^[\w\d\s.,!?¿¡'\"-]+$")
 
 
 @app.get("/")
@@ -16,10 +14,16 @@ def read_root():
 
 @app.post("/translate")
 def translate(request: TranslationRequest):
-    if not VALID_TEXT_REGEX.match(request.text):
-        raise HTTPException(status_code=400, detail="Invalid characters in text")
-
     translation = get_translation(request.text, request.language)
+    if translation is None:
+        raise HTTPException(status_code=400, detail="Unsupported text or language")
+
+    return {"translation": translation}
+
+
+@app.post("/jeringonza")
+def jeringonza(request: JeringonzaRequest):
+    translation = get_jeringonza(request.text)
     if translation is None:
         raise HTTPException(status_code=400, detail="Unsupported text or language")
 
