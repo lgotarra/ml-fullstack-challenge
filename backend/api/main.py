@@ -31,6 +31,16 @@ def read_root():
     return {"Hello": "World"}
 
 
+@app.get("/healthz")
+def health_check():
+    return {"status": "ok"}
+
+
+@app.get("/ready")
+def readiness_check():
+    return {"status": "ready"}
+
+
 @app.post("/translate")
 def translate(request: TranslationRequest):
     translation = get_translation(request.text, request.language)
