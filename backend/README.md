@@ -50,3 +50,7 @@ fastapi dev api/main.py
 ```
 
 This will launch the FastAPI app with automatic reload on file changes.
+
+## 🔗 Frontend
+
+The corresponding Vue frontend can be found in the `./web` directory. Please refer to its [README](../web/README.md) for setup instructions.
