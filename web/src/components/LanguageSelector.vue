@@ -31,6 +31,8 @@ watch(
 <style scoped>
 select {
   padding: 0.5rem;
+  margin: 0.5rem 0;
   font-size: 1rem;
+  align-self: flex-start;
 }
 </style>

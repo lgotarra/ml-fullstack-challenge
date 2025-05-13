@@ -1,8 +1,14 @@
 <template>
-  <main>
-    <TextInput v-model="text" />
+  <main class="centered-main">
     <LanguageSelector v-model="language" :languages="SUPPORTED_LANGUAGES" />
-    <ResponseDisplay :output="output" :error="error" />
+    <div class="main-row">
+      <div class="input-wrapper">
+        <TextInput v-model="text" />
+      </div>
+      <div class="response-wrapper">
+        <ResponseDisplay :output="output" :error="error" />
+      </div>
+    </div>
   </main>
 </template>
 
@@ -53,3 +59,24 @@ async function triggerFetch() {
   }
 }
 </script>
+
+<style>
+.centered-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 2rem;
+  margin: 0 auto;
+}
+.main-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+
+</style>
