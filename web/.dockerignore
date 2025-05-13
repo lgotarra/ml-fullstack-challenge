@@ -1,6 +1,7 @@
-.env.*
+.env
 *.env
 README.md
 env.template
 node_modules
 .vscode/
+!*.env.deploy
