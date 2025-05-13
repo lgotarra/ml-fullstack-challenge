@@ -6,6 +6,9 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 # Copy the application into the container.
 COPY . /app
 
+# Copy the environment variables.
+COPY .env.deploy /app/.env
+
 # Install the application dependencies.
 WORKDIR /app
 RUN uv sync --frozen --no-cache
