@@ -1,5 +1,5 @@
-const API_URL = import.meta.env.VITE_API_URL || '__API_URL__'
-const TRANSLATION_ENDPOINT = import.meta.env.VITE_TRANSLATION_ENDPOINT || '__TRANSLATION_ENDPOINT__'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const TRANSLATION_ENDPOINT = import.meta.env.VITE_TRANSLATION_ENDPOINT || '/translate'
 
 export async function fetchTranslation(text: string, language: string): Promise<string> {
   const url = `${API_URL}${TRANSLATION_ENDPOINT}`
