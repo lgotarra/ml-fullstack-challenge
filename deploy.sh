@@ -12,7 +12,7 @@ echo "🧹 Deleting previous ConfigMaps..."
 kubectl delete configmap backend-env frontend-env --ignore-not-found
 
 echo "🧩 Creating new ConfigMaps from .env files..."
-kubectl create configmap backend-env --from-env-file=./backend/api/.env
+kubectl create configmap backend-env --from-env-file=./backend/api/.env.deploy
 kubectl create configmap frontend-env --from-env-file=./web/.env.deploy
 
 echo "📦 Applying Kubernetes manifests..."
