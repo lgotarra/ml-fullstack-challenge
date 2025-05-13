@@ -1,10 +1,29 @@
 from fastapi import FastAPI, HTTPException
-import re
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os
 from api.models import TranslationRequest, JeringonzaRequest
 from api.services.translation_service import get_translation
 from api.services.jeringonza_service import get_jeringonza
 
+load_dotenv()
+
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+
 app = FastAPI()
+
+if ENVIRONMENT == "development":
+    app.add_middleware(
+        CORSMiddleware,
+        # Allow default Vue.js dev server
+        allow_origins=[
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+        ],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 
 @app.get("/")
