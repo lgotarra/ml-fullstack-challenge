@@ -11,7 +11,20 @@ export async function fetchTranslation(text: string, language: string): Promise<
 
   if (!response.ok) {
     const errorData = await response.json()
-    throw new Error(errorData.detail || 'Unknown error')
+
+    let errorMessage = 'Unknown error'
+    if (Array.isArray(errorData.detail)) {
+      errorMessage = errorData.detail
+        .map((item: any) => {
+          const loc = item.loc?.join('.') || ''
+          return `${loc}: ${item.msg}`
+        })
+        .join('\n')
+    } else if (typeof errorData.detail === 'string') {
+      errorMessage = errorData.detail
+    }
+
+    throw new Error(errorMessage)
   }
 
   const data = await response.json()
