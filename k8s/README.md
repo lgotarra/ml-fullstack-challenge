@@ -24,6 +24,12 @@ Both services are deployed locally using **Minikube**, **Docker**, and **Kuberne
     ./deploy.sh
     ```
 
+    You can optionally pass custom paths to the backend and frontend `.env` files:
+
+    ```bash
+    ./deploy.sh ./custom/backend.env ./custom/frontend.env
+    ```
+
     This script performs the following actions:
 
     - Enables Docker inside the Minikube environment.
