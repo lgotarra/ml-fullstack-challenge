@@ -78,7 +78,5 @@ def jeringonza(request: JeringonzaRequest):
     - text: The input text to transform.
     """
     translation = get_jeringonza(request.text)
-    if translation is None:
-        raise HTTPException(status_code=400, detail="Unsupported text or language")
 
     return {"translation": translation}
