@@ -48,7 +48,7 @@ echo "📝 Copying frontend env to $TEMP_ENV_PATH..."
 cp "$FRONTEND_ENV_PATH" "$TEMP_ENV_PATH"
 
 echo "🔨 Building Docker images..."
-docker build --no-cache -t backend:local --build-arg ENV_FILE="${BACKEND_ENV_PATH}" ./backend
+docker build --no-cache -t backend:local ./backend
 docker build --no-cache -t frontend:local --build-arg ENV_FILE="$FRONTEND_ENV_BASENAME" ./web
 
 # Cleanup temporary env file after build
