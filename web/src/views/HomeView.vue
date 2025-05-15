@@ -3,7 +3,7 @@
     <LanguageSelector v-model="language" :languages="SUPPORTED_LANGUAGES" />
     <div class="main-row">
       <div class="input-wrapper">
-        <TextInput v-model="text" />
+        <TextInput v-model="input" @validation-error="inputError = $event" />
       </div>
       <div class="response-wrapper">
         <ResponseDisplay :output="output" :error="error" />
@@ -13,14 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import TextInput from '@/components/TextInput.vue'
 import ResponseDisplay from '@/components/ResponseDisplay.vue'
 import LanguageSelector from '@/components/LanguageSelector.vue'
 import { SUPPORTED_LANGUAGES } from '@/constants/languages'
 import { fetchTranslation } from '@/services/api'
 
-const text = ref('')
+const input = ref('')
+const inputError = ref('')
 const language = ref(SUPPORTED_LANGUAGES[0].value)
 const output = ref('')
 const error = ref('')
@@ -28,29 +29,31 @@ const error = ref('')
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null
 
 // Fetch translation when text changes after a debounce period
-watch(text, () => {
+watchEffect(() => {
   if (debounceTimeout) clearTimeout(debounceTimeout)
 
+  if (!input.value.trim() || inputError.value) {
+    output.value = ''
+    error.value = ''
+    return
+  }
+
   debounceTimeout = setTimeout(() => {
-    if (!text.value.trim()) {
-      output.value = ''
-      error.value = ''
-      return
-    }
     triggerFetch()
   }, 1000)
 })
 
 // Immediately fetch when language changes
 watch(language, () => {
-  if (text.value.trim()) {
+  if (input.value.trim() && !inputError.value) {
     triggerFetch()
   }
 })
 
 async function triggerFetch() {
+  if (inputError.value) return // Don't fetch if there is an input validation error
   try {
-    const result = await fetchTranslation(text.value, language.value)
+    const result = await fetchTranslation(input.value, language.value)
     output.value = result
     error.value = ''
   } catch (err) {
@@ -77,6 +80,4 @@ async function triggerFetch() {
   align-items: flex-start;
   gap: 2rem;
 }
-
-
 </style>

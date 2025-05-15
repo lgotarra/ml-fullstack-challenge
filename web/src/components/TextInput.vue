@@ -20,6 +20,7 @@ import { ref, watch } from 'vue'
 const props = defineProps<{ modelValue: string }>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void
+  (e: 'validation-error', value: string): void
 }>()
 
 const internalText = ref(props.modelValue)
@@ -48,11 +49,12 @@ function onInput() {
 
   if (!VALID_TEXT_REGEX.test(value)) {
     error.value = 'Text contains invalid characters'
-    // Restore translation result value
-    value = ''
+    emit('validation-error', error.value)
+    return
   }
 
   emit('update:modelValue', value)
+  emit('validation-error', '')
 }
 </script>
 
