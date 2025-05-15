@@ -60,7 +60,7 @@ def translate(request: TranslationRequest):
     """
     Translates the given text into the specified language.
     - text: The input text to translate.
-    - language: The target language code (e.g., 'en', 'es').
+    - language: The target language code (e.g., 'French', 'Spanish', etc.).
     """
     translation = get_translation(request.text, request.language)
     if translation is None:
