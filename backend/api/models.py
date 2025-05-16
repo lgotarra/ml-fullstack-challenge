@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 import re
 
 # Regex for valid text (letters, numbers, punctuation, basic whitespace)
@@ -12,7 +12,7 @@ class TextValidatedModel(BaseModel):
         ..., max_length=500, description="Text to be translated or transformed"
     )
 
-    @validator("text")
+    @field_validator("text")
     def check_valid_text(cls, v):
         if not VALID_TEXT_REGEX.match(v):
             raise ValueError("Invalid characters in text")
