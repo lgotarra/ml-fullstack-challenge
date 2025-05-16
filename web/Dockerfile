@@ -1,12 +1,15 @@
-FROM node:18 AS builder
+FROM node:18-bookworm-slim AS builder
 
 WORKDIR /app
 
 # Copy the application into the container.
 COPY . /app
 
-# Copy the environment variables.
-COPY .env.deploy /app/.env
+# Set build-time variable for the env file path
+ARG ENV_FILE=.env.deploy
+
+# Copy the environment file to the expected location inside the image
+COPY ${ENV_FILE} /app/.env
 
 # Install the application dependencies.
 RUN npm install

@@ -24,17 +24,32 @@ Both services are deployed locally using **Minikube**, **Docker**, and **Kuberne
     ./deploy.sh
     ```
 
-    This script performs the following actions:
+    ### Optional flags:
+    You can customize the deployment by passing the following flags:
+
+    - `--back_env=PATH` → path to the backend .env file
+
+    - `--front_env=PATH` → path to the frontend .env file
+
+    - `--restart` → if present, deletes existing pods to force use of rebuilt images
+
+    Example:
+
+    ```bash
+    ./deploy.sh --back_env=./custom/backend.env --front_env=./custom/frontend.env --restart
+    ```
+
+    ### What the script does:
 
     - Enables Docker inside the Minikube environment.
+    - Prints the selected configuration.
     - Builds Docker images for both backend and frontend (`backend:local` and `frontend:local`).
     - Deletes existing Kubernetes `ConfigMaps` (if any).
-    - Creates new `ConfigMaps` from the corresponding `.env.deploy` files:
-      - `./backend/api/.env.deploy` → used by the backend
-      - `./web/.env.deploy` → used by the frontend
+    - Creates new `ConfigMaps` from the corresponding `.env` files.
     - Applies the Kubernetes manifests:
       - `k8s/backend.yaml`
       - `k8s/frontend.yaml`
+    - If `--restart` is set, deletes current pods (`kubectl delete pod -l app=...`) so that Kubernetes pulls the new images.
 
 ---
 
